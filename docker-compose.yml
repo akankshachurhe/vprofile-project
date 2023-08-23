@@ -8,7 +8,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - vprodbdata: /var/lib/mysql
+      - vprodbdata:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=vprodbpass
 
@@ -23,15 +23,15 @@ services:
       - "15672:15672"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
   vproapp:
     build:
-      context:./Docker-files/app
+      context: ./Docker-files/app
     image: akankshachurhe/vprofileapp
     container_name: vproapp
     ports:
-      -"8080:8080"
+      - "8080:8080"
     volumes:
       - vproappdata:/usr/local/tomcat/webapps
 
@@ -41,7 +41,7 @@ services:
     image: akankshachurhe/vprofileweb
     container_name: vproweb
     ports:
-      -"80:80"
+      - "80:80"
 
 volumes:
   vprodbdata: {}
